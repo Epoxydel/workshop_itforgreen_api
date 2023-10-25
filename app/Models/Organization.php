@@ -9,6 +9,6 @@ class Organization extends Model
     protected $table = 'organizations';
 
     protected $fillable = [
-        'name', 'address', 'city', 'zip', 'status', 'type', 'description', 'image'
+        'title', 'address', 'city', 'zip', 'status', 'type', 'description', 'image'
     ];
 }

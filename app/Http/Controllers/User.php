@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CreateUserException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -22,21 +23,5 @@ class User extends Controller
         } else {
             return response()->json(['message' => 'Échec de la connexion'], 401);
         }
-    }
-
-    /**
-     * @throws ValidationException
-     */
-    function create(Request $request): JsonResponse
-    {
-        throw new CreateUserException(
-            Validator::make($request->all(), [
-                'name' => 'required',
-                'email' => 'required|email|unique:users',
-            ])
-        );
-
-        $email = $request->input('email');
-        $password = $request->input('password');
     }
 }

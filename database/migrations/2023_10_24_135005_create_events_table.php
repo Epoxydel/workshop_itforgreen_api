@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('id_organization');
             $table->string('titre');
             $table->string('description');
-            $table->string('besoin');
+            $table->string('needs');
             $table->date('date');
             $table->timestamps();
         });

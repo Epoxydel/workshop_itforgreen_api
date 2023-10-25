@@ -15,10 +15,20 @@ class Organization extends Controller
             $type = $request->input('type');
             $organizations = OrganizationModel::where('status', 1)
                 ->where('type', 'LIKE', '%' . $type . '%')
-                ->get();
+                ->get()
+                ->map(function ($organization) {
+                    $organization->type = explode(',', $organization->type);
+                    return $organization;
+                });
         } else {
-            $organizations = OrganizationModel::where('status', '!=', 0)->get();
+            $organizations = OrganizationModel::where('status', '!=', 0)
+                ->get()
+                ->map(function ($organization) {
+                    $organization->type = explode(',', $organization->type);
+                    return $organization;
+                });
         }
+
         return response()->json($organizations);
     }
 
