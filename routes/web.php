@@ -17,11 +17,12 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->post('/api/user', 'User@login');
-$router->post('/api/organization', 'Organization@index');
-$router->post('/api/organization/type', 'Organization@allType');
-$router->post('/api/organization/{id}', 'Organization@getOrganization');
-$router->post('/api/event', 'Event@index');
-$router->post('/api/event/{id}', 'Event@getEvent');
-$router->post('/api/tool/hashPassword/{password}', 'Tool@hashPassword');
+$router->group(['middleware' => 'cors'], function () use ($router) {
+    $router->post('/api/user', 'User@login');
+    $router->post('/api/organization', 'Organization@index');
+    $router->post('/api/organization/type', 'Organization@allType');
+    $router->post('/api/organization/{id}', 'Organization@getOrganization');
+    $router->post('/api/event', 'Event@index');
+    $router->post('/api/event/{id}', 'Event@getEvent');
+});
 
